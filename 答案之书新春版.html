@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐴 马年答案之书 - 寻找新年好运</title>
+    <style>
+        :root {
+            --primary-color: #d32f2f;
+            --secondary-color: #ffeb3b;
+            --text-color: #333;
+            --bg-color: #fff8f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+            background-image:
+                radial-gradient(circle, rgba(211, 47, 47, 0.05) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 235, 59, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px, 30px 30px;
+            background-position: 0 0, 15px 15px;
+            animation: bgFloat 20s linear infinite;
+        }
+
+        @keyframes bgFloat {
+            0% {
+                background-position: 0 0, 15px 15px;
+            }
+            100% {
+                background-position: 50px 50px, 65px 65px;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(211, 47, 47, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '🧧';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 80px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .container::after {
+            content: '🎉';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 80px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(211, 47, 47, 0.2);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .book-description {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .book-container {
+            position: relative;
+            text-align: center;
+            margin: 30px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book {
+            width: 280px;
+            height: 400px;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            border-radius: 10px;
+            box-shadow: 0 15px 25px rgba(211, 47, 47, 0.3),
+                        0 5px 10px rgba(0, 0, 0, 0.1),
+                        inset 0 0 15px rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book::before {
+            content: '🐴';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 30px;
+            opacity: 0.3;
+        }
+
+        .book::after {
+            content: '🏮';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 30px;
+            opacity: 0.3;
+        }
+
+        .book:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(211, 47, 47, 0.4),
+                        0 10px 15px rgba(0, 0, 0, 0.2),
+                        inset 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .book-title {
+            color: white;
+            font-size: 1.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            animation: bookTitleShine 4s ease-in-out infinite;
+        }
+
+        @keyframes bookTitleShine {
+            0%, 100% {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 235, 59, 0.5);
+            }
+        }
+
+        .book-title::before, .book-title::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .book-title::before {
+            top: -15px;
+        }
+
+        .book-title::after {
+            bottom: -15px;
+        }
+
+        .question-form {
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            margin-bottom: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .question-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
+            outline: none;
+        }
+
+        .ask-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ask-btn::before {
+            content: '✨';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: left 0.3s;
+            opacity: 0;
+        }
+
+        .ask-btn::after {
+            content: '✨';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: right 0.3s;
+            opacity: 0;
+        }
+
+        .ask-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+        }
+
+        .ask-btn:hover::before {
+            left: 10px;
+            opacity: 1;
+        }
+
+        .ask-btn:hover::after {
+            right: 10px;
+            opacity: 1;
+        }
+
+        .ask-btn:active {
+            transform: translateY(1px);
+        }
+
+        .answer-container {
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-container.show {
+            opacity: 1;
+            transform: translateY(0);
+            animation: answerPopIn 0.8s ease-out;
+        }
+
+        @keyframes answerPopIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .answer-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            animation: answerTitlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes answerTitlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .answer-text {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            padding: 20px;
+            background-color: rgba(255, 235, 59, 0.15);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 2px solid rgba(211, 47, 47, 0.1);
+        }
+
+        .answer-text::before {
+            content: """;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 3rem;
+            color: rgba(211, 47, 47, 0.2);
+        }
+
+        .answer-text::after {
+            content: """;
+            position: absolute;
+            bottom: -50px;
+            right: 10px;
+            font-size: 3rem;
+            color: rgba(211, 47, 47, 0.2);
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .book {
+                width: 220px;
+                height: 320px;
+            }
+            
+            .book-title {
+                font-size: 1.5rem;
+            }
+            
+            .answer-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐴 马年答案之书 🐴</h1>
+            <p class="book-description">马年新春到，心想事成！提出你的问题，寻找新年的答案...</p>
+        </header>
+        
+        <div class="book-container">
+            <div class="book" id="magic-book">
+                <div class="book-title">答案之书</div>
+            </div>
+            
+            <div class="question-form">
+                <input type="text" class="question-input" id="question-input" placeholder="在这里输入你的问题..." autocomplete="off">
+                <button class="ask-btn" id="ask-btn">🐴 领取新年答案 🐴</button>
+            </div>
+            
+            <div class="answer-container" id="answer-container">
+                <h3 class="answer-title">命运之答:</h3>
+                <p class="answer-text" id="answer-text"></p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>记住，答案的力量在于你如何理解它。</p>
+        </footer>
+    </div>
+
+    <script>
+        // 答案列表
+        const answers = [
+            "是的",
+            "不是",
+            "也许吧",
+            "当然",
+            "绝对不是",
+            "值得尝试",
+            "不要这样做",
+            "命运说可以",
+            "请三思",
+            "相信你的直觉",
+            "是时候了",
+            "还没到时候",
+            "不要害怕",
+            "放手吧",
+            "坚持下去",
+            "改变方向",
+            "接受它",
+            "放弃吧",
+            "耐心等待",
+            "立刻行动",
+            "需要更多信息",
+            "寻求建议",
+            "不要忽视警告",
+            "相信这个过程",
+            "结果会很好",
+            "未来不明确",
+            "听从你的心",
+            "不要犹豫",
+            "等待更好的机会",
+            "注意细节",
+            "走出舒适区",
+            "保持现状",
+            "深呼吸，再想想",
+            "不要担心",
+            "慎重考虑",
+            "寻找平衡",
+            "重新评估",
+            "坚定你的信念",
+            "忘记过去",
+            "准备好了",
+            "再等等",
+            "现在不是时候",
+            "问自己为什么",
+            "这只是个开始",
+            "结束了",
+            "放松点",
+            "不要勉强",
+            "很可能",
+            "机会渺茫",
+            "命运对你微笑",
+            "当然可以",
+            "绝不",
+            "不要执着",
+            "需要新视角",
+            "顺其自然",
+            "这是你的选择",
+            "相信过程",
+            "事情会改变",
+            "重新开始",
+            "继续前进",
+            "慢下来",
+            "加速前进",
+            "不要被情绪影响",
+            "听取建议",
+            "自己决定",
+            "不确定",
+            "毫无疑问",
+            "看起来不错",
+            "形势不妙",
+            "别人怎么想不重要",
+            "考虑他人感受",
+            "保持开放心态",
+            "需要勇气",
+            "需要时间",
+            "今天就做",
+            "明天再说",
+            "随波逐流",
+            "逆流而上",
+            "接受挑战",
+            "寻找简单的方法",
+            "需要努力",
+            "不必强求",
+            "时机未到",
+            "时机已到",
+            "相信科学",
+            "相信直觉",
+            "找专业人士",
+            "自己解决",
+            "寻求合作",
+            "独立完成",
+            "这是必然的",
+            "这只是偶然",
+            "专注于当下",
+            "展望未来",
+            "不要回头",
+            "思考过去的教训",
+            "好运即将到来",
+            "准备应对挑战",
+             "当然可以",
+            "绝对不行",
+            "这取决于你的决定",
+    "你需要更多的信息",
+    "现在不是最佳时机",
+    "放手吧",
+    "你会后悔的",
+    "再试一次",
+    "机会即将到来",
+    "顺其自然",
+    "这不是你的责任",
+    "是的，但需要努力",
+    "你会遇到阻碍",
+    "让别人先行动",
+    "深思熟虑后再做决定",
+    "未来充满不确定性",
+    "你应该等待更好的时机",
+    "现在是行动的时刻",
+    "你需要休息一下",
+    "相信自己的直觉",
+    "你已经知道答案了",
+    "可能需要妥协",
+    "事情不会按计划进行",
+    "是的，但要谨慎",
+    "这会带来新的机遇",
+    "你的努力终将得到回报",
+    "你正在走正确的道路",
+    "先解决旧问题",
+    "你会发现新的可能性",
+    "这不是唯一的选择",
+    "你需要调整策略",
+    "选择一条不同的路",
+    "保持耐心，一切都会好转",
+    "现在不要急于做决定",
+    "你可以尝试，但不要期待太多",
+    "事情会变得更清晰",
+    "你应该先倾听",
+    "让它过去吧",
+    "你需要更多的勇气",
+    "现在正是开始的好时机",
+    "你的坚持是值得的",
+    "不要害怕失败",
+    "尝试新方法",
+    "你应该专注于当下",
+    "这将成为一次成长的机会",
+    "有时候放弃也是一种智慧",
+    "你需要重新评估你的目标",
+    "相信宇宙会给你答案",
+    "你应该问问自己：这真的是你想要的吗",
+    "你的直觉是正确的",
+    "不要让过去束缚你",
+    "有更重要的事情值得关注",
+    "你需要冷静思考",
+    "选择相信，而不是怀疑",
+    "你已经拥有所需的一切",
+    "是的，尽管困难重重",
+    "事情会比你想象的更顺利",
+    "这不是你的责任",
+    "你会得到你想要的答案",
+    "你需要时间来沉淀",
+    "不要因为害怕而退缩",
+    "你会找到新的方向",
+    "现在不要做决定",
+    "一切都会按预期进行",
+    "你会后悔错过这个机会",
+    "有些事情无法控制，接受它吧",
+    "是的，但要做好准备",
+    "你需要更深入地了解情况",
+    "现在还不是最佳时机",
+    "你应该调整你的期望",
+    "你会得到意想不到的帮助",
+    "你需要学会放手",
+    "一切都会变得更加清晰",
+    "你要相信自己的能力",
+    "你会收获比预期更多的回报",
+    "你需要放慢节奏",
+    "你应该把重点放在更重要的事情上",
+    "你正在朝着正确的方向前进",
+    "你需要一个新的视角",
+    "是的，但要保持灵活性",
+    "你需要更加坚定",
+    "这不是你的最佳选择",
+    "你应该坚持你的信念",
+    "你会找到答案的",
+    "不要让外界影响你的决定",
+    "你需要更多的时间来思考",
+    "你会有意想不到的收获",
+    "你应该顺其自然",
+    "你应该信任你的直觉",
+    "你需要做出改变",
+    "你正在接近成功",
+    "你不应该犹豫",
+    "你会迎来新的挑战",
+    "你需要调整你的态度",
+    "你需要一个新的目标",
+    "你会得到答案，但不是现在",
+    "你应该保持谦逊",
+    "你应该多听听别人的意见",
+    "你应该专注于自己",
+    "你已经拥有你需要的答案"
+        ];
+        
+        // DOM 元素
+        const questionInput = document.getElementById('question-input');
+        const askBtn = document.getElementById('ask-btn');
+        const answerContainer = document.getElementById('answer-container');
+        const answerText = document.getElementById('answer-text');
+        const magicBook = document.getElementById('magic-book');
+        
+        // 事件监听
+        askBtn.addEventListener('click', getAnswer);
+        questionInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                getAnswer();
+            }
+        });
+        
+        magicBook.addEventListener('click', function() {
+            questionInput.focus();
+        });
+        
+        // 获取答案函数
+        function getAnswer() {
+            const question = questionInput.value.trim();
+            
+            if (!question) {
+                shakeMagicBook();
+                return;
+            }
+            
+            // 添加书本摇晃效果
+            magicBook.classList.add('shake');
+            
+            // 清除回答容器的显示类
+            answerContainer.classList.remove('show');
+            
+            // 延时显示答案，制造神秘感
+            setTimeout(() => {
+                // 随机选择一个答案
+                const randomIndex = Math.floor(Math.random() * answers.length);
+                const answer = answers[randomIndex];
+                
+                // 显示答案
+                answerText.textContent = answer;
+                answerContainer.classList.add('show');
+                
+                // 移除摇晃效果
+                magicBook.classList.remove('shake');
+            }, 1000);
+        }
+        
+        // 书本摇晃动画
+        function shakeMagicBook() {
+            magicBook.classList.add('shake');
+            
+            setTimeout(() => {
+                magicBook.classList.remove('shake');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
