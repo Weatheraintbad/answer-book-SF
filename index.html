@@ -57,15 +57,20 @@
             // padding-bottom: 20px; /* 底部留出空间 */
         }
 
-        /* 当页面宽度大于762px时，采用手机端的缩放大小 */
+        /* 当页面宽度大于583px时，采用固定大小的手机端布局 */
         @media (min-width: 584px) {
             .app-container {
                 width: 583px; /* 固定宽度 */
                 margin: 0 auto; /* 居中显示 */
             }
 
+            .magic-book {
+                width: 280px; /* 固定宽度 */
+                height: 420px; /* 固定高度 */
+            }
+
             .book-container.flipping {
-                transform: translateX(40px); /* 调整翻页位移，确保答案页显示完整 */
+                transform: translateX(50%); /* 向右位移50%宽度 */
             }
         }
 
@@ -132,13 +137,13 @@
         }
 
         .subtitle {
-            font-size: 1.4rem;
-            color: #22305f;
+            font-size: 1.2rem;
+            color: #ffce7b;
             margin-top: 10px;
             margin-bottom: 20px;
             // font-style: italic;
-            font-weight: 1000;
-            text-shadow: 0 0 1px var(--gold), 0 0 3px var(--gold);
+            font-weight: 800;
+            text-shadow: 0 0 3px var(--gold);
         }
 
         .question-label {
@@ -153,7 +158,7 @@
         .main-content {
             // background: var(--white);// 取消白色圆角矩形背景
             border-radius: 25px;
-            padding: 120px 0 50px 0;
+            padding: 20px 0 50px 0;
             // box-shadow:
                 0 20px 60px rgba(200, 16, 46, 0.15),
                 0 0 0 1px rgba(200, 16, 46, 0.1);
@@ -168,8 +173,8 @@
 
         /* 翻页动画容器 */
         .magic-book {
-            width: 280px; /* 手机端缩放大小 */
-            height: 420px; /* 宽高比 2:3 */
+            width: 280px; /* 固定宽度，手机端大小 */
+            height: 420px; /* 固定高度，手机端大小 */
             margin: 0 auto 40px;
             position: relative;
             cursor: pointer;
@@ -248,11 +253,11 @@
         }
 
         .answer-page-content {
-            font-size: 4vw;
+            font-size: 1.2rem;
             color: #000000;
             font-weight: bold;
             text-align: center;
-            padding: 5vw;
+            padding: 20px;
 <!--            background: var(&#45;&#45;white);-->
 <!--            border-radius: 15px;-->
 <!--            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);-->
@@ -404,7 +409,7 @@
         }
 
         .book-container.flipping {
-            transform: translateX(250px);
+            transform: translateX(40px); /* 固定位移 */
         }
 
         .question-section {
@@ -487,7 +492,7 @@
         .answer-section {
             display: none;
             margin-top: 40px;
-            padding: 5vw;
+            padding: 20px;
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(74, 144, 226, 0.05) 100%);
             border-radius: 20px;
             border: 2px dashed var(--primary-blue);
@@ -558,7 +563,7 @@
         .footer {
             text-align: center;
             margin-top: 60px;
-            color: var(--gold);
+            color: #ffce7b;
             font-size: 0.9rem;
             position: relative;
             text-shadow: 0 0 1px var(--gold), 0 0 5px var(--gold);
@@ -624,61 +629,8 @@
             }
         }
 
-        /* 针对小屏手机 (max-width: 320px) */
-        @media (max-width: 320px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .subtitle {
-                font-size: 0.9rem;
-            }
-
-            .main-content {
-                padding: 20px 10px;
-            }
-
-            .magic-book {
-                height: 360px; /* 宽高比 2:3，240 * 1.5 = 360 */
-                max-width: 240px;
-            }
-
-            .book-container {
-                height: 360px;
-            }
-
-            .book-container.flipping {
-                transform: translateX(5px);
-            }
-
-            .book-title {
-                font-size: 1.4rem;
-            }
-
-            .book-subtitle {
-                font-size: 0.8rem;
-            }
-
-            .question-input {
-                padding: 12px 15px;
-                font-size: 0.9rem;
-            }
-
-            .ask-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
-                width: 220px; /* 小屏手机固定宽度 */
-                height: 50px; /* 小屏手机固定高度 */
-            }
-
-            .answer-page-content {
-                font-size: 1.2rem;
-                min-height: 80px;
-            }
-        }
-
-        /* 针对中屏手机 (max-width: 360px) */
-        @media (min-width: 321px) and (max-width: 360px) {
+        /* 针对所有手机尺寸 (max-width: 583px) */
+        @media (max-width: 583px) {
             h1 {
                 font-size: 1.6rem;
             }
@@ -727,59 +679,6 @@
             .answer-page-content {
                 font-size: 1.3rem;
                 min-height: 90px;
-            }
-        }
-
-        /* 针对大屏手机 (max-width: 480px) */
-        @media (min-width: 361px) and (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .main-content {
-                padding: 25px 15px;
-            }
-
-            .magic-book {
-                height: 420px; /* 宽高比 2:3，280 * 1.5 = 420 */
-                max-width: 280px;
-            }
-
-            .book-container {
-                height: 420px;
-            }
-
-            .book-container.flipping {
-                transform: translateX(10px);
-            }
-
-            .book-title {
-                font-size: 1.6rem;
-            }
-
-            .book-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .question-input {
-                padding: 15px 18px;
-                font-size: 1rem;
-            }
-
-            .ask-btn {
-                padding: 14px 30px;
-                font-size: 1.1rem;
-                width: 240px; /* 响应式固定宽度 */
-                height: 55px; /* 响应式固定高度 */
-            }
-
-            .answer-page-content {
-                font-size: 1.4rem;
-                min-height: 100px;
             }
         }
     </style>
