@@ -21,7 +21,8 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            background-color: #000000; /* 基础背景色为黑色 */
+            overflow-x: hidden; /* 防止水平滚动 */
         }
 
         * {
@@ -32,16 +33,36 @@
 
         body {
             font-family: 'Source Han Serif SC', 'Noto Serif SC', serif;
-            background-image: url('bg1.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            background-attachment: fixed;
             color: var(--text-dark);
             line-height: 1.6;
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            /* 移除 align-items: center 使页面可以上下滚动 */
+        }
+
+        /* 主容器 */
+        .app-container {
+            position: relative;
+            width: 100vw;
+            max-width: 583px;
+            min-height: 100vh; /* 最小高度为视口高度 */
+            background-image: url('bg1.png');
+            background-repeat: no-repeat; /* 不重复填充 */
+            background-position: center top; /* 背景图顶部居中 */
+            background-size: 100% 100%; /* 宽度和高度都填满容器 */
+            background-attachment: scroll;
+            overflow-y: auto; /* 允许垂直滚动 */
+            // padding-bottom: 20px; /* 底部留出空间 */
+        }
+
+        /* 当页面宽度大于762px时，采用手机端的缩放大小 */
+        @media (min-width: 763px) {
+            .app-container {
+                width: 583px; /* 固定宽度 */
+                margin: 0 auto; /* 居中显示 */
+            }
         }
 
         body::before {
@@ -143,9 +164,8 @@
 
         /* 翻页动画容器 */
         .magic-book {
-            width: 100%;
-            max-width: 400px;
-            height: 600px; /* 宽高比 2:3，400 * 1.5 = 600 */
+            width: 400px; /* 固定宽度 */
+            height: 600px; /* 固定高度 */
             margin: 0 auto 40px;
             position: relative;
             cursor: pointer;
@@ -154,7 +174,7 @@
         .book-container {
             list-style: none;
             width: 100%;
-            height: 600px;
+            height: 100%; /* 继承父容器高度 */
             transform-style: preserve-3d;
             perspective: 1200px;
             transition: 1.5s;
@@ -224,11 +244,11 @@
         }
 
         .answer-page-content {
-            font-size: 2rem;
+            font-size: 4vw;
             color: #000000;
             font-weight: bold;
             text-align: center;
-            padding: 30px;
+            padding: 5vw;
 <!--            background: var(&#45;&#45;white);-->
 <!--            border-radius: 15px;-->
 <!--            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);-->
@@ -408,6 +428,9 @@
             color: var(--text-dark);
             transition: all 0.3s ease;
             font-family: inherit;
+            line-height: 1.5; /* 设置行高 */
+            vertical-align: middle; /* 垂直对齐 */
+            text-align: center; /* 水平居中 */
         }
 
         .question-input:focus {
@@ -460,7 +483,7 @@
         .answer-section {
             display: none;
             margin-top: 40px;
-            padding: 30px;
+            padding: 5vw;
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(74, 144, 226, 0.05) 100%);
             border-radius: 20px;
             border: 2px dashed var(--primary-blue);
@@ -493,7 +516,7 @@
         }
 
         .answer-text {
-            font-size: 2rem;
+            font-size: 4vw;
             color: var(--primary-blue);
             font-weight: bold;
             text-align: center;
@@ -531,9 +554,10 @@
         .footer {
             text-align: center;
             margin-top: 60px;
-            color: var(--text-light);
+            color: var(--gold);
             font-size: 0.9rem;
             position: relative;
+            text-shadow: 0 0 1px var(--gold), 0 0 5px var(--gold);
         }
 
         .firecracker {
@@ -582,16 +606,128 @@
             }
 
             .book-title {
-                font-size: 2rem;
+                font-size: 4vw;
             }
 
             .answer-page-content {
                 font-size: 1.6rem;
                 min-height: 120px;
             }
+
+            .ask-btn {
+                width: 260px; /* 768px断点固定宽度 */
+                height: 58px; /* 768px断点固定高度 */
+            }
         }
 
-        @media (max-width: 480px) {
+        /* 针对小屏手机 (max-width: 320px) */
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+            }
+
+            .magic-book {
+                height: 360px; /* 宽高比 2:3，240 * 1.5 = 360 */
+                max-width: 240px;
+            }
+
+            .book-container {
+                height: 360px;
+            }
+
+            .book-container.flipping {
+                transform: translateX(5px);
+            }
+
+            .book-title {
+                font-size: 1.4rem;
+            }
+
+            .book-subtitle {
+                font-size: 0.8rem;
+            }
+
+            .question-input {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+
+            .ask-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                width: 220px; /* 小屏手机固定宽度 */
+                height: 50px; /* 小屏手机固定高度 */
+            }
+
+            .answer-page-content {
+                font-size: 1.2rem;
+                min-height: 80px;
+            }
+        }
+
+        /* 针对中屏手机 (max-width: 360px) */
+        @media (min-width: 321px) and (max-width: 360px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .main-content {
+                padding: 20px 12px;
+            }
+
+            .magic-book {
+                height: 390px; /* 宽高比 2:3，260 * 1.5 = 390 */
+                max-width: 260px;
+            }
+
+            .book-container {
+                height: 390px;
+            }
+
+            .book-container.flipping {
+                transform: translateX(8px);
+            }
+
+            .book-title {
+                font-size: 1.5rem;
+            }
+
+            .book-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .question-input {
+                padding: 13px 16px;
+                font-size: 0.95rem;
+            }
+
+            .ask-btn {
+                padding: 13px 28px;
+                font-size: 1.05rem;
+                width: 230px; /* 中屏手机固定宽度 */
+                height: 52px; /* 中屏手机固定高度 */
+            }
+
+            .answer-page-content {
+                font-size: 1.3rem;
+                min-height: 90px;
+            }
+        }
+
+        /* 针对大屏手机 (max-width: 480px) */
+        @media (min-width: 361px) and (max-width: 480px) {
             h1 {
                 font-size: 1.8rem;
             }
@@ -633,6 +769,8 @@
             .ask-btn {
                 padding: 14px 30px;
                 font-size: 1.1rem;
+                width: 240px; /* 响应式固定宽度 */
+                height: 55px; /* 响应式固定高度 */
             }
 
             .answer-page-content {
@@ -643,7 +781,8 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="app-container">
+    <div class="container">
     <div class="header">
         <img src="title.png" alt="新年答案之书" class="title-image" style="display: block; margin: 0 auto; max-width: 70%; height: auto;">
         <p class="subtitle">提出你的问题，寻找新年的答案...</p>
@@ -749,18 +888,19 @@
         </div>
 
         <div class="question-section">
-            <label for="question-input" class="question-label">你的问题</label>
-            <input type="text" id="question-input" class="question-input" placeholder="在这里输入你的问题..." autocomplete="off">
+<!--            <label for="question-input" class="question-label">你的问题</label>-->
+            <input type="text" id="question-input" class="question-input" placeholder="输入你的问题..." autocomplete="off">
         </div>
 
         <div class="btn-container">
-            <button class="ask-btn" id="ask-btn">点击获取答案</button>
+            <button class="ask-btn" id="ask-btn">获取答案</button>
         </div>
 
     </div>
 
     <div class="footer">
         <p style="margin-top: -52px; font-size: 0.8rem;">记住，答案的力量在于你如何理解它</p>
+    </div>
     </div>
 </div>
 
@@ -986,7 +1126,15 @@
     });
 
     magicBook.addEventListener('click', function() {
-        questionInput.focus();
+        const question = questionInput.value.trim();
+
+        if (!question) {
+            // 如果输入框没有内容，唤起键盘准备输入
+            questionInput.focus();
+        } else {
+            // 如果输入框已有内容，执行获取答案的逻辑
+            getAnswer();
+        }
     });
 
     // 获取答案函数
