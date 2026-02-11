@@ -21,8 +21,15 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #000000; /* 基础背景色为黑色 */
+            background-color: #000000; /* 默认竖屏模式为黑色背景 */
             overflow-x: hidden; /* 防止水平滚动 */
+        }
+
+        /* 横屏模式下隐藏黑色背景，使用透明背景 */
+        @media (min-width: 584px) {
+            html, body {
+                background-color: transparent; /* 横屏模式下透明背景，让背景图片可见 */
+            }
         }
 
         * {
@@ -45,7 +52,7 @@
         /* 主容器 */
         .app-container {
             position: relative;
-            width: 100vw;
+            width: 100%;
             max-width: 583px;
             min-height: 100vh; /* 最小高度为视口高度 */
             background-image: url('bg1.png');
@@ -54,23 +61,81 @@
             background-size: 100% 100%; /* 宽度和高度都填满容器 */
             background-attachment: scroll;
             overflow-y: auto; /* 允许垂直滚动 */
-            // padding-bottom: 20px; /* 底部留出空间 */
+            margin: 0 auto;
         }
 
-        /* 当页面宽度大于583px时，采用固定大小的手机端布局 */
+        /* 桌面端布局 */
         @media (min-width: 584px) {
             .app-container {
-                width: 583px; /* 固定宽度 */
-                margin: 0 auto; /* 居中显示 */
+                width: 100%; /* 全宽度 */
+                max-width: 100%; /* 取消最大宽度限制 */
+                margin: 0; /* 取消居中 */
+                background: transparent; /* 透明背景 */
+                /* 使用 bg2 作为桌面端背景 */
+                background-image: none; /* 移除原 bg1 背景 */
+                height: 100vh; /* 固定高度，确保垂直居中 */
+                overflow: hidden; /* 关闭滚动 */
             }
 
+            /* 桌面端使用 bg2 作为背景 */
+            .app-container::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('bg2.png');
+                background-repeat: repeat; /* 平铺填充 */
+                background-size: cover; /* 覆盖整个屏幕，不留白 */
+                background-position: center;
+                z-index: -1;
+            }
+
+            /* 魔法书随页面大小动态缩放，保持宽高比 */
             .magic-book {
-                width: 280px; /* 固定宽度 */
-                height: 420px; /* 固定高度 */
+                width: 60vw; /* 随页面宽度动态缩放，放大为原来的 150% */
+                max-width: 600px; /* 最大宽度限制，放大为原来的 150% */
+                height: auto; /* 自动高度，保持宽高比 */
+                aspect-ratio: 2 / 3; /* 宽高比 2:3 */
+                margin: 0 auto; /* 垂直水平居中 */
+                transform: translateY(50px); /* 向下移动 50px */
             }
 
+            /* 魔法书容器也需要保持宽高比 */
+            .book-container {
+                height: 100%;
+            }
+
+            /* 确保魔法书组件垂直水平居中 */
+            .book-section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* 翻页动画位移调整 */
             .book-container.flipping {
-                transform: translateX(50%); /* 向右位移50%宽度 */
+                transform: translateX(80px); /* 调整位移 */
+            }
+
+            /* 横屏模式下隐藏除魔法书之外的组件 */
+            .header,
+            .question-section,
+            .btn-container,
+            .footer {
+                display: none;
+            }
+
+
+            /* 确保魔法书垂直水平居中显示 */
+            .main-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100%;
+                overflow: hidden; /* 关闭横屏模式下的页面滚动 */
             }
         }
 
@@ -158,12 +223,59 @@
         .main-content {
             // background: var(--white);// 取消白色圆角矩形背景
             border-radius: 25px;
-            padding: 20px 0 50px 0;
+            padding: 40px 20px 60px 20px;
             // box-shadow:
                 0 20px 60px rgba(200, 16, 46, 0.15),
                 0 0 0 1px rgba(200, 16, 46, 0.1);
             position: relative;
             overflow: visible;
+            max-width: 1200px; /* 限制最大宽度 */
+            margin: 0 auto; /* 居中显示 */
+        }
+
+        /* 桌面端内容布局 */
+        @media (min-width: 900px) {
+            .main-content {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 60px;
+                padding: 60px 40px;
+            }
+
+            .book-section {
+                flex: 0 0 auto;
+                margin-bottom: 0;
+            }
+
+            .question-section,
+            .btn-container {
+                flex: 1;
+                max-width: 400px;
+                margin-top: 60px;
+            }
+
+            .question-input {
+                font-size: 1.3rem;
+                padding: 22px 24px;
+            }
+
+            .ask-btn {
+                width: 320px;
+                height: 70px;
+                font-size: 1.4rem;
+            }
+
+            /* 魔法书随页面大小动态缩放，保持宽高比 */
+            .magic-book {
+                width: 60vw; /* 随页面宽度动态缩放，放大为原来的 150% */
+                max-width: 600px; /* 最大宽度限制，放大为原来的 150% */
+                height: auto; /* 自动高度，保持宽高比 */
+                aspect-ratio: 2 / 3; /* 宽高比 2:3 */
+                margin: 0 auto; /* 垂直水平居中 */
+                transform: translateY(50px); /* 向下移动 50px */
+            }
         }
 
         .book-section {
@@ -413,7 +525,7 @@
         }
 
         .question-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .question-label {
@@ -562,7 +674,7 @@
 
         .footer {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 70px;
             color: #ffce7b;
             font-size: 0.9rem;
             position: relative;
@@ -602,12 +714,15 @@
             }
 
             .magic-book {
-                height: 480px; /* 宽高比 2:3，320 * 1.5 = 480 */
-                max-width: 320px;
+                width: 280px; /* 固定宽度，手机端大小 */
+                height: 420px; /* 固定高度，手机端大小 */
+                margin: 0 auto 40px;
+                position: relative;
+                cursor: pointer;
             }
 
             .book-container {
-                height: 480px;
+                height: 420px;
             }
 
             .book-container.flipping {
@@ -688,7 +803,7 @@
     <div class="container">
     <div class="header">
         <img src="title.png" alt="新年答案之书" class="title-image" style="display: block; margin: 0 auto; max-width: 70%; height: auto;">
-        <p class="subtitle">提出你的问题，寻找新年的答案...</p>
+<!--        <p class="subtitle">提出你的问题，寻找新年的答案...</p>-->
         <div class="decorative-line"></div>
     </div>
 
@@ -752,7 +867,7 @@
                     <li class="book-page">
                         <div class="book-inner-page">
                             <div class="inner-page-content" style="font-size: 1.2rem; color: var(--text-dark); font-style: italic;">
-                                改变方向
+
                             </div>
                         </div>
                     </li>
@@ -760,7 +875,7 @@
                     <li class="book-page">
                         <div class="book-inner-page">
                             <div class="inner-page-content" style="font-size: 1.2rem; color: var(--text-dark); font-style: italic;">
-                                放松点
+
                             </div>
                         </div>
                     </li>
@@ -790,20 +905,20 @@
             </div>
         </div>
 
-        <div class="question-section">
+        <div class="content-right">
+            <div class="question-section">
 <!--            <label for="question-input" class="question-label">你的问题</label>-->
-            <input type="text" id="question-input" class="question-input" placeholder="输入你的问题..." autocomplete="off">
+                <input type="text" id="question-input" class="question-input" placeholder="输入问题，寻找新年的答案..." autocomplete="off">
+            </div>
+
+            <div class="btn-container">
+                <button class="ask-btn" id="ask-btn">获取答案</button>
+            </div>
+
+            <div class="footer">
+                <p style="margin-top: -52px; font-size: 0.8rem;">记住，答案的力量在于你如何理解它</p>
+            </div>
         </div>
-
-        <div class="btn-container">
-            <button class="ask-btn" id="ask-btn">获取答案</button>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        <p style="margin-top: -52px; font-size: 0.8rem;">记住，答案的力量在于你如何理解它</p>
-    </div>
     </div>
 </div>
 
@@ -1029,16 +1144,42 @@
     });
 
     magicBook.addEventListener('click', function() {
-        const question = questionInput.value.trim();
+        // 检查是否是横屏模式
+        const isDesktop = window.innerWidth >= 584;
 
-        if (!question) {
-            // 如果输入框没有内容，唤起键盘准备输入
-            questionInput.focus();
+        if (isDesktop) {
+            // 横屏模式下直接播放动画加载答案
+            desktopGetAnswer();
         } else {
-            // 如果输入框已有内容，执行获取答案的逻辑
-            getAnswer();
+            // 竖屏模式下保持原操作逻辑
+            const question = questionInput.value.trim();
+            if (!question) {
+                questionInput.focus();
+            } else {
+                getAnswer();
+            }
         }
     });
+
+    // 横屏模式获取答案函数
+    function desktopGetAnswer() {
+        // 检查是否已经翻页
+        if (isFlipped) {
+            // 反向翻页回到封面
+            bookContainer.classList.remove('flipping');
+            isFlipped = false;
+            return;
+        }
+
+        // 加载随机答案
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        const answer = answers[randomIndex];
+        answerPageContent.textContent = answer;
+
+        // 播放翻页动画
+        bookContainer.classList.add('flipping');
+        isFlipped = true;
+    }
 
     // 获取答案函数
     function getAnswer() {
